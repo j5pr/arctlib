@@ -7,6 +7,7 @@ ArctLib, the Kotlin library for SpigotMC.
    * [ArctLib](#module-arctlib)
    * [ArctCore](#module-arctcore)
    * [TestPlugin](#module-testplugin)
+ * [Contributing](#contributing)
  * [License](#license)
 
 ## Modules
