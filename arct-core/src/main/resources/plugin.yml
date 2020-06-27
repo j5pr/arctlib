@@ -1,0 +1,35 @@
+main: 'io.arct.arctcore.ArctCore'
+name: 'ArctCore'
+author: 'arctfox'
+version: '1.0.0-alpha'
+
+description: >
+  A core plugin that provides an implementation of arctlib for spigot.
+  Additionally, basic utilities have been added.
+
+load: STARTUP
+
+commands:
+  arctcore:
+    usage: 'Usage: /arctcore'
+    description: 'Show ArctCore installation information'
+    aliases:
+      - ac
+      - arct
+
+  script:
+    usage: 'Usage: /script [start|reset|remove|run|execute] [..args]'
+    description: 'Create and run kotlinscript scripts in-game!'
+    aliases:
+      - script
+      - exec
+      - eval
+
+permissions:
+  arctcore.info:
+    default: true
+    description: 'Allows the usage of the /arctcore command'
+
+  arctcore.script:
+    default: op
+    description: 'Allows the usage of the /script command'
