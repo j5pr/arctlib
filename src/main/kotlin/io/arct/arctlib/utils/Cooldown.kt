@@ -37,6 +37,7 @@ class Cooldown(id: UUID, val duration: Int) {
          * Gets the remaining time left in the cooldown
          *
          * @param id The UUID to check
+         * @return The time left in seconds
          */
         fun remaining(id: UUID): Int {
             val cooldown: Cooldown? = cooldowns[id]
