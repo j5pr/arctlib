@@ -58,7 +58,3 @@ subprojects {
         implementation(project(":"))
     }
 }
-
-dependencies {
-    implementation("de.tr7zw:item-nbt-api:2.3.2")
-}

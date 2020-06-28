@@ -10,7 +10,7 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffectType
 
-class CommandGuiTest : Command("testgui") {
+class CommandTestItems : Command("testitems") {
     @Run(CommandTarget.Player) fun run(player: Player, args: List<String>) {
         listOf(
             item(Material.APPLE) {

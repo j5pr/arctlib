@@ -1,0 +1,16 @@
+$format:
+  info: '&7{}'
+  warn: '&6Warn&7: &e{}'
+  error: '&4{exception}&7: &c{}'
+
+info:
+
+warn:
+
+error:
+  commands:
+    execution-target: 'This command cannot be run by &e{target}&7!'
+
+  permissions:
+    permission: 'You do not have permission to do this!'
+    permission-other: '&e{target}&c does not have permission&7!'

@@ -1,5 +1,8 @@
 package io.arct.arctlib.plugin.commands
 
+import io.arct.arctlib.exceptions.commands.ExecutionTargetException
+import io.arct.arctlib.exceptions.permissions.PermissionException
+import io.arct.arctlib.extensions.send
 import io.arct.arctlib.extensions.unaryPlus
 import io.arct.arctlib.plugin.Plugin
 import org.bukkit.command.CommandExecutor
@@ -24,15 +27,13 @@ abstract class Command(val name: String) : CommandExecutor {
 
         for (permission in permissions)
             if (!sender.hasPermission(permission)) {
-                sender.sendMessage(+"&4Error: &cYou do not have permission to run this command!")
+                plugin raise PermissionException() send sender
                 return true
             }
 
         for (method in this::class.java.methods) {
             val annotation: Run = method.annotations.find { it.annotationClass == Run::class } as? Run
                 ?: continue
-
-            plugin.logger.info(method.name)
 
             if (annotation.target.isEmpty()) {
                 method.invoke(this, sender, args.toList())
@@ -50,8 +51,24 @@ abstract class Command(val name: String) : CommandExecutor {
             }
         }
 
-        sender.sendMessage(+"&4Error: &cCould not find an execution target for " + if (sender is Player) "PLAYER" else "CONSOLE")
+        plugin raise ExecutionTargetException(
+            if (sender is Player) CommandTarget.Player
+            else CommandTarget.Console
+        ) send sender
+
         return false
+    }
+
+    fun execute(vararg args: String) {
+        for (method in this::class.java.methods) {
+            val annotation: Run = method.annotations.find { it.annotationClass == Run::class } as? Run
+                ?: continue
+
+            if (annotation.target.contains(CommandTarget.System)) {
+                method.invoke(this, args.toList())
+                return
+            }
+        }
     }
 
     fun register(plugin: Plugin): Command {

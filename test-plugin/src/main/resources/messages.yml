@@ -1,0 +1,19 @@
+$format:
+  info: '&7{}'
+  warn: '&6Warn&7: &e{}'
+  error: '&4Error&7: &c{}'
+
+info:
+
+warn:
+  dot: 'arct.io is good web site'
+
+error:
+  bad-args: 'yeet bad argz {0}'
+
+  commands:
+    execution-target: 'haha {0} L'
+
+  permissions:
+    permission: 'imagin not have pemishun'
+    permission-other: '&e{target}&c thjey d{0}}nt got good!'

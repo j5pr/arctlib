@@ -3,4 +3,5 @@ name: 'TestPlugin'
 version: '1.0.0'
 
 commands:
-  testgui:
+  testitems:
+  testmessage:
