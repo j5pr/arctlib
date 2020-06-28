@@ -5,6 +5,7 @@ import io.arct.arctlib.exceptions.permissions.PermissionException
 import io.arct.arctlib.extensions.send
 import io.arct.arctlib.extensions.unaryPlus
 import io.arct.arctlib.plugin.Plugin
+import io.arct.arctlib.utils.Cooldown
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.ConsoleCommandSender
@@ -30,6 +31,9 @@ abstract class Command(val name: String) : CommandExecutor {
                 plugin raise PermissionException() send sender
                 return true
             }
+
+        if (Cooldown.active((sender as Player).uniqueId))
+            return false
 
         for (method in this::class.java.methods) {
             val annotation: Run = method.annotations.find { it.annotationClass == Run::class } as? Run
