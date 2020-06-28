@@ -29,7 +29,7 @@ abstract class Command(val name: String) : CommandExecutor {
         for (permission in permissions)
             if (!sender.hasPermission(permission)) {
                 plugin raise PermissionException() send sender
-                return true
+                return false
             }
 
         if (Cooldown.active((sender as Player).uniqueId))
