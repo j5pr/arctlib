@@ -23,6 +23,7 @@ class Cooldown(id: UUID, val duration: Int) {
          * Lets us know if we are in a cooldown or not
          *
          * @param id The UUID to check
+         * @return If we are active or not
          */
         fun active(id: UUID): Boolean {
             return if (remaining(id) > 0) {
