@@ -44,7 +44,7 @@ abstract class Command(val name: String) : CommandExecutor {
                 return true
             }
 
-            if (sender is Player && annotation.target.contains(CommandTarget.Player)) {
+            if (sender !is ConsoleCommandSender && annotation.target.contains(CommandTarget.Player)) {
                 method.invoke(this, sender, args.toList())
                 return true
             }
@@ -56,11 +56,11 @@ abstract class Command(val name: String) : CommandExecutor {
         }
 
         plugin raise ExecutionTargetException(
-            if (sender is Player) CommandTarget.Player
+            if (sender !is ConsoleCommandSender) CommandTarget.Player
             else CommandTarget.Console
         ) send sender
 
-        return false
+        return true
     }
 
     fun execute(vararg args: String) {
