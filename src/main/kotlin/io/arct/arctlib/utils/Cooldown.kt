@@ -25,7 +25,7 @@ class Cooldown(id: UUID, val duration: Int) {
          * @param id The UUID to check
          */
         fun active(id: UUID): Boolean {
-            return if (remaining(id) >= 1) {
+            return if (remaining(id) > 0) {
                 true
             } else {
                 stop(id)
