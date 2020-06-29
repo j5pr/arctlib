@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.arct.arctlib.extensions
 
 import org.bukkit.World
