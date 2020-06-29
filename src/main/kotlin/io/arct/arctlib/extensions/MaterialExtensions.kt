@@ -5,6 +5,10 @@ package io.arct.arctlib.extensions
 import org.bukkit.Material
 
 /**
+ * TODO: isEnchantable, isMechanic, isNature, isTradable, isHellCategory
+ */
+
+/**
  * Check if a [Material] is an axe.
  *
  * @return Whether the [Material] is an axe.
