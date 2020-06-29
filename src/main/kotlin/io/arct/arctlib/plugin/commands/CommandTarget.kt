@@ -5,9 +5,5 @@ enum class CommandTarget {
     System,
     Console;
 
-    override fun toString(): String = mapOf(
-        Player to "PLAYER",
-        System to "SYSTEM",
-        Console to "CONSOLE"
-    )[this] ?: error("Could not convert CommandTarget to String")
+    override fun toString(): String = name.toUpperCase()
 }
