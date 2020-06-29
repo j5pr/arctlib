@@ -6,7 +6,7 @@ import org.bukkit.entity.Player
 
 class OtherPermissionException(target: Player) : InternalPluginException() {
     override val node = "permissions.permission-other"
-    override val default = "&e{target}&7 does not have permission!"
+    override val default = "&f{target} &7does not have permission"
 
     override val placeholders = mapOf(
         "target" to target.name,
