@@ -4,5 +4,5 @@ import io.arct.arctlib.exceptions.InternalPluginException
 
 class CooldownException(remaining: Int) : InternalPluginException() {
     override val node = "commands.cooldown"
-    override val default = "&7You are on cooldown for this command, please wait $remaining more seconds!"
+    override val default = "&7Please wait &f$remaining &7more seconds before executing this command again."
 }
