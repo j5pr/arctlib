@@ -7,11 +7,11 @@ import io.arct.arctlib.utils.Cooldown
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class CommandTestPing : Command("testping") {
+class CommandTestCooldown1 : Command("testcooldown1") {
     override val cooldown: Int = 10
 
     @Run(CommandTarget.Player)
     fun run(sender: Player, args: List<String>) {
-        sender.sendMessage("Pong")
+        sender.sendMessage("Apples")
     }
 }

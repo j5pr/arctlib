@@ -4,5 +4,14 @@ version: '1.0.0'
 
 commands:
   testitems:
+    description: Test out all the items.
+    aliases: [ti]
   testmessage:
-  testping:
+    description: Test message.
+    aliases: [tm]
+  testcooldown1:
+    description: Test cooldown 1.
+    aliases: [tc1]
+  testcooldown2:
+    description: Test cooldown 2.
+    aliases: [tc2]
