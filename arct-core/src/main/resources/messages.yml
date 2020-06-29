@@ -10,7 +10,11 @@ warn:
 error:
   commands:
     execution-target: 'This command cannot be run by &f{target}&7!'
+    cooldown: 'Please wait &f{remaining} &cseconds before doing this again&7!'
 
   permissions:
     insufficent-permissions: 'You do not have permission to do this&7!'
     target-exempt: '&f{target}&c is exempt from this&7!'
+
+  players:
+    invalid-player: 'That is an invalid player&7.'

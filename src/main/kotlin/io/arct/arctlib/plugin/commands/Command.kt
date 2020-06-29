@@ -16,7 +16,7 @@ abstract class Command(val name: String) : CommandExecutor {
         private set
 
     open val permissions: List<String> = listOf()
-    open val cooldownDuration: Int = 0
+    open val cooldown: Int = 0
 
     override fun onCommand(
         sender: CommandSender,
@@ -33,13 +33,13 @@ abstract class Command(val name: String) : CommandExecutor {
                 return true
             }
 
-        if (sender is Player && cooldownDuration > 0) {
-            if (Cooldown.active(sender.uniqueId, name)) {
-                plugin raise CooldownException(Cooldown.remaining(sender.uniqueId)) send sender
+        if (sender is Player && cooldown > 0) {
+            if (Cooldown.active(sender.uniqueId, this)) {
+                plugin raise CooldownException(Cooldown.of(sender.uniqueId, this)!!.remaining) send sender
                 return true
-            } else {
-                Cooldown(sender.uniqueId, name, cooldownDuration)
             }
+
+            Cooldown(sender.uniqueId, cooldown, this).start()
         }
 
         for (method in this::class.java.methods) {
@@ -53,7 +53,6 @@ abstract class Command(val name: String) : CommandExecutor {
 
             if (sender is Player && annotation.target.contains(CommandTarget.Player)) {
                 method.invoke(this, sender, args.toList())
-
                 return true
             }
 

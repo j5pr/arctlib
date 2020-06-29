@@ -8,11 +8,10 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 class CommandTestPing : Command("testping") {
-    override val cooldownDuration: Int = 10
+    override val cooldown: Int = 10
 
     @Run(CommandTarget.Player)
-    fun run(sender: CommandSender, args: List<String>) {
-        val player: Player = sender as Player
+    fun run(sender: Player, args: List<String>) {
         sender.sendMessage("Pong")
     }
 }
