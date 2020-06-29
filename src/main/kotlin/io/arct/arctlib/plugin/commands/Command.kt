@@ -1,9 +1,8 @@
 package io.arct.arctlib.plugin.commands
 
 import io.arct.arctlib.exceptions.commands.ExecutionTargetException
-import io.arct.arctlib.exceptions.permissions.PermissionException
+import io.arct.arctlib.exceptions.permissions.InsufficientPermissionsException
 import io.arct.arctlib.extensions.send
-import io.arct.arctlib.extensions.unaryPlus
 import io.arct.arctlib.plugin.Plugin
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -27,7 +26,7 @@ abstract class Command(val name: String) : CommandExecutor {
 
         for (permission in permissions)
             if (!sender.hasPermission(permission)) {
-                plugin raise PermissionException() send sender
+                plugin raise InsufficientPermissionsException() send sender
                 return true
             }
 

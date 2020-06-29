@@ -9,8 +9,8 @@ warn:
 
 error:
   commands:
-    execution-target: 'This command cannot be run by &e{target}&7!'
+    execution-target: 'This command cannot be run by &f{target}&7!'
 
   permissions:
-    permission: 'You do not have permission to do this!'
-    permission-other: '&e{target}&c does not have permission&7!'
+    insufficent-permissions: 'You do not have permission to do this&7!'
+    target-exempt: '&f{target}&c is exempt from this&7!'
