@@ -9,6 +9,7 @@ warn:
 
 error:
   commands:
+    disabled: 'This command is currently disabled&7!'
     execution-target: 'This command cannot be run by &f{target}&7!'
     cooldown: 'Please wait &f{remaining} &cseconds before doing this again&7!'
 

@@ -1,8 +1,10 @@
 package io.arct.arctlib.plugin.commands
 
+import io.arct.arctlib.exceptions.commands.CommandDisabledException
 import io.arct.arctlib.exceptions.commands.CooldownException
 import io.arct.arctlib.exceptions.commands.ExecutionTargetException
 import io.arct.arctlib.exceptions.permissions.InsufficientPermissionsException
+import io.arct.arctlib.extensions.needs
 import io.arct.arctlib.extensions.send
 import io.arct.arctlib.plugin.Plugin
 import io.arct.arctlib.utils.Cooldown
@@ -27,20 +29,11 @@ abstract class Command(val name: String) : CommandExecutor {
         if (name != command.name.toLowerCase())
             return false
 
-        for (permission in permissions)
-            if (!sender.hasPermission(permission)) {
-                plugin raise InsufficientPermissionsException() send sender
-                return true
-            }
-
-        if (sender is Player && cooldown > 0) {
-            if (Cooldown.active(sender.uniqueId, this)) {
-                plugin raise CooldownException(Cooldown.of(sender.uniqueId, this)!!.remaining) send sender
-                return true
-            }
-
-            Cooldown(sender.uniqueId, cooldown, this).start()
-        }
+        if ( // Checks
+            !checkPermission(sender) ||
+            !checkEnabled(sender) || 
+            !checkCooldown(sender)
+        ) return true
 
         for (method in this::class.java.methods) {
             val annotation: Run = method.annotations.find { it.annotationClass == Run::class } as? Run
@@ -68,6 +61,39 @@ abstract class Command(val name: String) : CommandExecutor {
         ) send sender
 
         return false
+    }
+
+    private fun checkEnabled(sender: CommandSender): Boolean {
+        if (plugin.config.contains("commands.enabled.$name") && !plugin.config.getBoolean("commands.enabled.$name")){
+            plugin raise CommandDisabledException() send sender
+            return false
+        }
+
+        return true
+    }
+
+    private fun checkPermission(sender: CommandSender): Boolean {
+        for (permission in permissions) {
+            if (sender needs permission) {
+                plugin raise InsufficientPermissionsException() send sender
+                return false
+            }
+        }
+
+        return true
+    }
+
+    private fun checkCooldown(sender: CommandSender): Boolean {
+        if (sender !is Player || cooldown < 1)
+            return true
+
+        if (Cooldown.active(sender.uniqueId, this)) {
+            plugin raise CooldownException(Cooldown.of(sender.uniqueId, this)!!.remaining) send sender
+            return false
+        }
+
+        Cooldown(sender.uniqueId, cooldown, this).start()
+        return true
     }
 
     fun execute(vararg args: String) {
