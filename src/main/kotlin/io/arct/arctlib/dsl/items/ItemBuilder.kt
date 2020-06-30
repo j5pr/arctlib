@@ -38,7 +38,7 @@ open class ItemBuilder(val material: Material) {
             item.durability = durability
 
         if (lore.size > 0)
-            meta.lore = lore
+            meta.lore = lore.map { +"&r$it" }
 
         for (enchant in enchants)
             meta.addEnchant(enchant.first, enchant.second, enchant.third)

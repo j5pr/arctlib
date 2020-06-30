@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
 
-    id("com.github.johnrengelman.shadow")
+    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 group = "io.arct"
@@ -14,8 +14,16 @@ configurations {
 }
 
 tasks {
+    jar {
+        enabled = false
+    }
+
+    build {
+        dependsOn("shadowJar")
+    }
+
     shadowJar {
-        archiveBaseName.set("arctcore")
+        archiveBaseName.set("arct-core")
         archiveClassifier.set("")
         archiveVersion.set("1.0.0-alpha")
     }

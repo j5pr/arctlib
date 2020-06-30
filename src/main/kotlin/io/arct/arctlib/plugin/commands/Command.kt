@@ -31,7 +31,7 @@ abstract class Command(val name: String) : CommandExecutor {
 
         if ( // Checks
             !checkPermission(sender) ||
-            !checkEnabled(sender) || 
+            !checkEnabled(sender) ||
             !checkCooldown(sender)
         ) return true
 

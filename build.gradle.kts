@@ -1,7 +1,5 @@
 plugins {
     kotlin("jvm") version "1.3.72"
-
-    id("com.github.johnrengelman.shadow") version "5.2.0"
 }
 
 group = "io.arct"
